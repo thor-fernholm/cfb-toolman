@@ -1,3 +1,27 @@
+# Toolman 
+
+This is a fork of ComplexFuncBench that integrates with Toolman.
+
+## Run evaluation
+
+Set LLM-judge model in `compare_method.py`, and use OTHER model than in benchmarking!
+
+Custom flags/arguments `bellman_model` and `ptc` can be used, and only work for Toolman.
+ - `bellman_model` can be used to choose provider and model (default Bellman model string).
+ - `ptc` can be used to enable PTC, otherwise defaults to regular tool-calling.
+
+```bash
+python evaluation.py --model_name toolman --bellman_model OpenAI/gpt-4o-mini --ptc
+```
+
+## Export results 
+
+Set `.jsonl` file name to whichever was created during evaluation.
+
+```bash
+python print_results.py --result_dir result/toolman/full-1000.jsonl
+```
+
 # Complex Function Calling Benchmark (ComplexFuncBench)
 
 <p align="center">

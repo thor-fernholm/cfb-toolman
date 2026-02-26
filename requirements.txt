@@ -1,9 +1,11 @@
-anthropic
-zhipuai
-mistralai
+#anthropic
+#zhipuai
+#mistralai
 numpy
 openai
 Requests
 scipy
 FlagEmbedding
 torch==2.3.0
+transformers<4.45.0  # Added to prevent installing incompatible new versions
+accelerate<1.0.0     # Added to prevent installing incompatible new versions

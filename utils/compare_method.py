@@ -8,6 +8,7 @@ import numpy as np
 from FlagEmbedding import FlagModel
 from scipy.optimize import linear_sum_assignment
 
+from models.toolman import ToolmanModel
 from utils.utils import *
 from utils.rapidapi import RapidAPICall
 from models.gpt import GPTModel
@@ -24,7 +25,7 @@ class CompareFCBase:
             tool_info = json.load(f)
         tool_info = tool_info['booking-com15']
         self.api_call = RapidAPICall(tool="booking-com15", tool_info=tool_info)
-        self.model = GPTModel("gpt-4o-2024-05-13")
+        self.model = ToolmanModel("OpenAI/gpt-4o-2024-05-13") # set evaluator model
         self.logger = logger
         self.error_message = []
         self.exact_match_dict = load_json("utils/exact_match_values.json")

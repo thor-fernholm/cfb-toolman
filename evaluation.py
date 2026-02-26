@@ -13,29 +13,32 @@ from functools import partial
 from utils.logger import Logger
 from utils.utils import *
 
-from runner.gpt_runner import GPTRunner
-from runner.glm_runner import GLMRunner, GLMAPIRunner
-from runner.claude_runner import ClaudeRunner
-from runner.qwen_runner import QwenRunner
-from runner.llama_runner import LlamaRunner
-from runner.mistral_runner import MistralRunner
-from runner.response_runner import RespEvalRunner
+# from runner.gpt_runner import GPTRunner
+# from runner.glm_runner import GLMRunner, GLMAPIRunner
+# from runner.claude_runner import ClaudeRunner
+# from runner.qwen_runner import QwenRunner
+# from runner.llama_runner import LlamaRunner
+# from runner.mistral_runner import MistralRunner
+# from runner.response_runner import RespEvalRunner
+from runner.toolman_response_runner import RespEvalRunner
+from runner.toolman_runner import ToolmanRunner
 
 MODEL_MAPPING = {
-    "gpt-4o-2024-08-06": GPTRunner,
-    "gpt-4-turbo-2024-04-09": GPTRunner,
-    "claude-3-5-sonnet-20240620": ClaudeRunner,
-    "claude-3-5-sonnet-20241022": ClaudeRunner,
-    "claude-3-5-haiku-20241022": ClaudeRunner,
-    "glm-4-9b-chat": GLMRunner,
-    "glm-4-long": GLMAPIRunner,
-    "Llama-3.1-70B": LlamaRunner,
-    "Llama-3.1-8B": LlamaRunner,
-    "Meta-Llama-3.1-405B-Instruct-FP8": LlamaRunner,
-    "qwen2.5-7b-instruct": QwenRunner,
-    "qwen2.5-72b-instruct": QwenRunner,
-    "qwen2.5-7b-instruct": QwenRunner,
-    "mistral-large-2407": MistralRunner,
+    # "gpt-4o-2024-08-06": GPTRunner,
+    # "gpt-4-turbo-2024-04-09": GPTRunner,
+    # "claude-3-5-sonnet-20240620": ClaudeRunner,
+    # "claude-3-5-sonnet-20241022": ClaudeRunner,
+    # "claude-3-5-haiku-20241022": ClaudeRunner,
+    # "glm-4-9b-chat": GLMRunner,
+    # "glm-4-long": GLMAPIRunner,
+    # "Llama-3.1-70B": LlamaRunner,
+    # "Llama-3.1-8B": LlamaRunner,
+    # "Meta-Llama-3.1-405B-Instruct-FP8": LlamaRunner,
+    # "qwen2.5-7b-instruct": QwenRunner,
+    # "qwen2.5-72b-instruct": QwenRunner,
+    # "mistral-large-2407": MistralRunner,
+    "toolman": ToolmanRunner,
+    "toolman-ptc": ToolmanRunner,
 }
 
 
@@ -48,6 +51,9 @@ def get_args():
     parser.add_argument("--vllm_url", type=str)
     parser.add_argument("--proc_num", type=int, default=1)
     parser.add_argument("--debug", action="store_true")
+    # toolman args
+    parser.add_argument("--bellman_model", type=str, default="OpenAI/gpt-4o-mini")
+    parser.add_argument("--ptc", action="store_true", dest="enable_ptc", default=False)
 
     args = parser.parse_args()
 
