@@ -52,7 +52,7 @@ class ToolmanRunner(ModelRunner):
         self.init_golden(convs)
 
         while True:
-            llm_response = self.model(messages, tools=toolman_functions)
+            llm_response = self.model(messages, tools=toolman_functions, test_id=data['id'])
             if llm_response is None:
                 return self.return_result(messages, {"error_type": "unknown_error", "content": "llm_response is None"})
 

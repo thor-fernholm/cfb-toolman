@@ -13,7 +13,7 @@ from prompts.response import (
 class RespEvalRunner:
     def __init__(self, args, logger):
         self.logger = logger
-        self.model = ToolmanModel("OpenAI/gpt-4o-2024-08-06") # should be: gpt-4o-2024-08-06
+        self.model = ToolmanModel(model_name="OpenAI/gpt-4o-2024-08-06") # should be: gpt-4o-2024-08-06
 
     @retry(max_attempts=10)
     def completeness_eval(self, **kwargs):

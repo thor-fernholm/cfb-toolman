@@ -36,6 +36,7 @@ class ToolmanModel:
                 {"role": "user", "content": text}
             ],
             "system_prompt": prefix,
+            "test_id": "judge",
             "temperature": 0.0
         }
 
@@ -65,7 +66,7 @@ class FunctionCallToolman(ToolmanModel):
         self.new_tool_responses = []
 
     @retry(max_attempts=5, delay=10)
-    def __call__(self, messages, tools=None, **kwargs: Any):
+    def __call__(self, messages, tools=None, test_id="", **kwargs: Any):
         if "function_call" not in json.dumps(messages, ensure_ascii=False):
             self.messages = copy.deepcopy(messages)
 
@@ -74,12 +75,11 @@ class FunctionCallToolman(ToolmanModel):
             "messages": self.messages,
             "temperature": 0.0,
             "tools": tools,
-            "tool_choice": "auto", # unused?
-            "max_tokens": 2048, # unused?
             "enable_ptc": self.enable_ptc,
             "toolman_history": self.toolman_history, # pass back toolman history
             # "toolman_calls": self.toolman_calls # pass newest calls
-            "new_tool_responses": self.new_tool_responses
+            "new_tool_responses": self.new_tool_responses,
+            "test_id": test_id
         }
 
         try:

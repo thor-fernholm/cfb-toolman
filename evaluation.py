@@ -46,7 +46,7 @@ def get_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--log_dir", type=str, default="logs/test.log")
     parser.add_argument("--input_file", type=str, default="data/ComplexFuncBench.jsonl")
-    parser.add_argument("--model_name", type=str, required=True, choices=list(MODEL_MAPPING.keys()), help="The name of the model to be evaluated.")
+    parser.add_argument("--model_name", type=str, required=True, choices=list(MODEL_MAPPING.keys()), help="The name of the model to be evaluated.", default="toolman")
     parser.add_argument('--exp_name', type=str, default='full-1000')
     parser.add_argument("--vllm_url", type=str)
     parser.add_argument("--proc_num", type=int, default=1)
@@ -56,6 +56,10 @@ def get_args():
     parser.add_argument("--ptc", action="store_true", dest="enable_ptc", default=False)
 
     args = parser.parse_args()
+
+    # Append "-ptc" to the model name if the flag is active
+    if args.enable_ptc and args.model_name == "toolman":
+        args.model_name = "toolman-ptc"
 
     os.makedirs(f"logs/{datetime.date.today().strftime('%Y-%m-%d')}/{args.model_name}", exist_ok=True)
     os.makedirs(f"result/{args.model_name}/{args.exp_name}/logs", exist_ok=True)

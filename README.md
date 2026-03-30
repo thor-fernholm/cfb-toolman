@@ -11,7 +11,7 @@ Custom flags/arguments `bellman_model` and `ptc` can be used, and only work for 
  - `ptc` can be used to enable PTC, otherwise defaults to regular tool-calling.
 
 ```bash
-python evaluation.py --model_name toolman --bellman_model OpenAI/gpt-4o-mini --ptc
+python evaluation.py --model_name toolman --bellman_model OpenAI/gpt-5-mini-2025-08-07 --ptc --proc_num 10
 ```
 
 ## Export results 
