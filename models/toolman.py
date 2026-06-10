@@ -36,7 +36,7 @@ class ToolmanModel:
                 {"role": "user", "content": text}
             ],
             "system_prompt": prefix,
-            "test_id": "judge",
+            "test_id": "llm-judge",
             "temperature": 0.0
         }
 
